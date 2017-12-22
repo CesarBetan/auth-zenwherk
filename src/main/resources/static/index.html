@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Nuzur</h1>
+    <div class="container unauthenticated">
+        <div>
+            <form id="login" action="/login" method="post" class="form form-login">
+                <input type="hidden" id="csrf_token" name="_csrf" value=""/>
+                <div id="form-top">
+                    <div id="form-title">Login</div>
+                    <div class="form-field">
+                        <input id="login-username" type="email" name="username" class="form-input" placeholder="Username" >
+                    </div>
+                    <div class="form-field">
+                        <input id="login-password" type="password" name="password" class="form-input" placeholder="Password">
+                    </div>
+                </div>
+                <div id="form-bottom">
+                    <button type="submit" class="btn btn-primary" id="loginbtn" >Login</button>
+                </div>
+            </form>
+        </div>
+        <hr />
+        <div>
+            With Facebook: <a href="/login/facebook">click here</a>
+        </div>
+        <div>
+            With Github: <a href="/login/github">click here</a>
+        </div>
+
+    </div>
+    <div class="container authenticated" style="display:none">
+        Logged in as: <span id="user"></span>
+        <div>
+            <button onClick="logout()" class="btn btn-primary">Logout</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#csrf_token").val(Cookies.get('XSRF-TOKEN'));
+    $.get("/user", function(data) {
+        $("#user").html(data.principal.name);
+        $(".unauthenticated").hide();
+        $(".authenticated").show();
+    });
+
+    var logout = function() {
+        $.post("/logout", function() {
+            $("#user").html('');
+            $(".unauthenticated").show();
+            $(".authenticated").hide();
+        });
+        return true;
+    };
+
+    $.ajaxSetup({
+        beforeSend : function(xhr, settings) {
+            if (settings.type === 'POST' || settings.type === 'PUT' || settings.type === 'DELETE') {
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                    xhr.setRequestHeader("X-XSRF-TOKEN",
+                        Cookies.get('XSRF-TOKEN'));
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
