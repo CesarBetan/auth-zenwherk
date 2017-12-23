@@ -1,20 +1,19 @@
 package com.nuzur.auth.service;
 
 
+import com.nuzur.auth.dao.UserDao;
 import com.nuzur.common.domain.User;
 import com.nuzur.common.util.PasswordHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
@@ -28,8 +27,7 @@ import java.util.List;
 public class AuthProvider implements AuthenticationProvider {
     
     @Autowired
-    @Qualifier("jdbcProvisioning")
-    private JdbcTemplate template;
+    private UserDao userDao;
 
     static final Logger logger = LoggerFactory.getLogger(AuthProvider.class);
     
@@ -39,11 +37,12 @@ public class AuthProvider implements AuthenticationProvider {
         final String username = (String)authentication.getPrincipal();
         final String password = (String)authentication.getCredentials();
 
-        logger.debug("username" + username);
-        List<User> users = template.query("Select * from user where email=? limit 1",
-                new Object[]{username}, new BeanPropertyRowMapper<User>(User.class));
+        logger.debug(authentication.getDetails().toString());
 
-        logger.debug("user size" + users.size());
+        logger.debug("username: " + username);
+        List<User> users = userDao.getUsersByEmail(username);
+
+        logger.debug("user count: " + users.size());
         if (users.size() == 0) {
             throw new BadCredentialsException("user not found with email: " + username);
         }
@@ -53,7 +52,7 @@ public class AuthProvider implements AuthenticationProvider {
             throw new BadCredentialsException("No password set for user");
         }
         if (!user.getPassword().equals(PasswordHandler.encrypt(password))) {
-            throw new BadCredentialsException("Bad Credentials " + username + " " + password);
+            throw new BadCredentialsException("Bad Credentials");
         }
         user.setPassword(null);
         return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());

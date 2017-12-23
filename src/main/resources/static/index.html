@@ -3,59 +3,141 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Demo</title>
+    <title>Nuzur Auth</title>
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
     <base href="/"/>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/lux/bootstrap.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
+    <style>
+        html{
+            font-size:16px;
+        }
+        body{
+            background-color:#333;
+            background-image: url("http://slintapps.com/nuzur_back3.png");
+            background-size: 100%;
+        }
+        #loginPanel {
+            display: inline-block;
+            width:480px;
+            padding:50px;
+            box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.6);
+            border-radius:unset;
+        }
+
+        #main{
+            text-align: center;
+            vertical-align: middle;
+            height: 100vh;
+            width: 100vw;
+            display: table-cell;
+            max-width: unset;
+            margin: unset;
+            padding: unset;
+        }
+
+        #loginbtn{
+            display: inline-block;
+            float: right;
+        }
+
+        #form-bottom{
+            height:45px;
+        }
+
+        h1{
+            font-size: 45px;
+            padding-bottom: 15px;
+            font-weight:900;
+        }
+        .ssologin{
+            display: inline-block;
+            width:189px;
+            text-align: center;
+            float: left;
+            opacity:0.6;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .ssologin:hover {
+            opacity:1.0;
+        }
+        .ssologin img{
+            width:150px;
+            display: inline-block;
+        }
+
+        .form-control{
+            font-size: 18px;
+            height: 50px;
+        }
+        #ssocontainer{
+            padding-top:10px;
+        }
+
+        #userinfo{
+            padding:20px;
+            font-size:18px;
+        }
+
+        #userinfo #user{
+            color:#000;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Nuzur</h1>
-    <div class="container unauthenticated">
-        <div>
-            <form id="login" action="/login" method="post" class="form form-login">
-                <input type="hidden" id="csrf_token" name="_csrf" value=""/>
-                <div id="form-top">
-                    <div id="form-title">Login</div>
-                    <div class="form-field">
-                        <input id="login-username" type="email" name="username" class="form-input" placeholder="Username" >
+<div id="main" class="container">
+    <div id="loginPanel" class="panel">
+        <h1>Nuzur</h1>
+        <div class="unauthenticated">
+            <div>
+                <form id="login" action="/login" method="post" class="form form-login">
+                    <input type="hidden" id="csrf_token" name="_csrf" value=""/>
+                    <input type="hidden" id="client" name="client_id" value="nuzur"/>
+                    <div id="form-top">
+                        <div class="form-group">
+                            <input required id="login-username" type="email" name="username" class="form-control" placeholder="Username" >
+                        </div>
+                        <div class="form-group">
+                            <input required id="login-password" type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
                     </div>
-                    <div class="form-field">
-                        <input id="login-password" type="password" name="password" class="form-input" placeholder="Password">
+                    <div id="form-bottom">
+                        <button type="submit" class="btn btn-primary" id="loginbtn" >Login</button>
                     </div>
-                </div>
-                <div id="form-bottom">
-                    <button type="submit" class="btn btn-primary" id="loginbtn" >Login</button>
-                </div>
-            </form>
-        </div>
-        <hr />
-        <div>
-            With Facebook: <a href="/login/facebook">click here</a>
-        </div>
-        <div>
-            With Github: <a href="/login/github">click here</a>
-        </div>
+                </form>
+            </div>
+            <hr />
+            <div id="ssocontainer">
+                <a class="ssologin" href="/login/facebook"><img src="http://slintapps.com/fb_btn.png" /></a>
+                <a class="ssologin" href="/login/github"><img src="http://slintapps.com/gh_btn.png" /></a>
+            </div>
 
-    </div>
-    <div class="container authenticated" style="display:none">
-        Logged in as: <span id="user"></span>
-        <div>
-            <button onClick="logout()" class="btn btn-primary">Logout</button>
+        </div>
+        <div class="authenticated" style="display:none">
+            <div id="userinfo">
+                Logged in as: <span id="user"></span>
+            </div>
+            <br />
+            <div>
+                <button onClick="logout()" class="btn btn-primary">Logout</button>
+            </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
     $("#csrf_token").val(Cookies.get('XSRF-TOKEN'));
-    $.get("/user", function(data) {
-        $("#user").html(data.principal.name);
-        $(".unauthenticated").hide();
-        $(".authenticated").show();
+    $.get("/me", function(data) {
+        if (data.principal) {
+            $("#user").html(data.principal.name);
+            $(".unauthenticated").hide();
+            $(".authenticated").show();
+        }
     });
 
     var logout = function() {

@@ -1,22 +1,24 @@
 facebook:
   client:
-    clientId: 233668646673605
-    clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+    clientId: 529573730738984
+    clientSecret: 3b9c119ef9e4dffee304c6f046b79345
     accessTokenUri: https://graph.facebook.com/oauth/access_token
     userAuthorizationUri: https://www.facebook.com/dialog/oauth
     tokenName: oauth_token
     authenticationScheme: query
     clientAuthenticationScheme: form
+    scope: email
   resource:
     userInfoUri: https://graph.facebook.com/me?fields=id,name,email,first_name,last_name
 
 github:
   client:
-    clientId: bd1c0a783ccdd1c9b9e4
-    clientSecret: 1a9030fbca47a5b2c28e92f19050bb77824b5ad1
+    clientId: dac5db50331a7520bf4d
+    clientSecret: 90c1c69d3991e1fc085467c5919ab7200473e291
     accessTokenUri: https://github.com/login/oauth/access_token
     userAuthorizationUri: https://github.com/login/oauth/authorize
     clientAuthenticationScheme: form
+    scope: user
   resource:
     userInfoUri: https://api.github.com/user
 
@@ -41,5 +43,7 @@ spring:
 logging:
   level:
     com.nuzur: debug
+server:
+  port: 9999
 
 
