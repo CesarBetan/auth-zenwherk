@@ -31,7 +31,7 @@ spring:
       password:
       driverClassName: com.mysql.jdbc.Driver
       connectionTestQuery: SELECT 1
-      maximumPoolSize: 10
+      maximumPoolSize: 5
     provisioning:
       initialize: false
       url: jdbc:mysql://localhost/nuzur
@@ -39,7 +39,7 @@ spring:
       password:
       driverClassName: com.mysql.jdbc.Driver
       connectionTestQuery: SELECT 1
-      maximumPoolSize: 10
+      maximumPoolSize: 5
 logging:
   level:
     com.nuzur: debug

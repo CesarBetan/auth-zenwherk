@@ -7,7 +7,7 @@
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>auth</name>
+	<name>Nuzur Auth</name>
 	<description>Nuzur Auth</description>
 
 	<parent>
