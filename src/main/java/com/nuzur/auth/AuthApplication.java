@@ -2,9 +2,10 @@ package com.nuzur.auth;
 
 import com.nuzur.auth.dao.UserDao;
 import com.nuzur.auth.service.AuthProvider;
+import com.nuzur.common.constant.ErrorNumber;
 import com.nuzur.common.domain.User;
 import com.nuzur.common.pojo.Result;
-import com.nuzur.common.util.Json;
+import com.nuzur.common.util.PermalinkHandler;
 import net.sf.ehcache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +73,7 @@ public class AuthApplication extends WebSecurityConfigurerAdapter {
     private UserDao userDao;
 
     @Autowired
-    private Json json;
+    private PermalinkHandler permalinkHandler;
 
 
     @RequestMapping({"/user", "/me"})
@@ -145,6 +146,13 @@ public class AuthApplication extends WebSecurityConfigurerAdapter {
                     newUser.setLastName(map.get("last_name").toString());
                     newUser.setEmail(map.get("email").toString());
                     newUser.setType(1);
+                    Optional<String> permalink = permalinkHandler.createPermalink(newUser.getName(), User.class, "permalink" , Optional.empty());
+                    if (permalink.isPresent()) {
+                        newUser.setPermalink(permalink.get());
+                    } else {
+                        return Result.failedResult(User.class, "Error creating permalink", ErrorNumber.INTERNAL_ERROR);
+                    }
+
                     if (path.contains("facebook")) {
                         newUser.setFacebookId(networkId);
                     } else if (path.contains("github")) {
