@@ -5,6 +5,7 @@ import com.nuzur.auth.service.AuthProvider;
 import com.nuzur.common.constant.ErrorNumber;
 import com.nuzur.common.domain.User;
 import com.nuzur.common.pojo.Result;
+import com.nuzur.common.util.LogMessage;
 import com.nuzur.common.util.PermalinkHandler;
 import net.sf.ehcache.CacheManager;
 import org.slf4j.Logger;
@@ -64,7 +65,11 @@ import java.util.Optional;
 public class AuthApplication extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthProvider.class);
+
     private static final Integer ORDER = -100;
+
+    @Autowired
+    protected LogMessage log;
 
     @Autowired
     private OAuth2ClientContext oauth2ClientContext;
@@ -146,6 +151,7 @@ public class AuthApplication extends WebSecurityConfigurerAdapter {
                     newUser.setLastName(map.get("last_name").toString());
                     newUser.setEmail(map.get("email").toString());
                     newUser.setType(1);
+                    newUser.setStatus(1);
                     Optional<String> permalink = permalinkHandler.createPermalink(newUser.getName(), User.class, "permalink" , Optional.empty());
                     if (permalink.isPresent()) {
                         newUser.setPermalink(permalink.get());
@@ -158,6 +164,7 @@ public class AuthApplication extends WebSecurityConfigurerAdapter {
                     } else if (path.contains("github")) {
                         newUser.setGithubId(networkId);
                     }
+                    log.message("Insert user").item(newUser).debug(logger);
                     Result<User> newUserResult = userDao.insert(newUser);
                     return newUserResult.getValue().get();
                 }
