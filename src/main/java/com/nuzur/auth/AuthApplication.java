@@ -144,6 +144,7 @@ public class AuthApplication extends WebSecurityConfigurerAdapter {
                     newUser.setName(map.get("first_name").toString());
                     newUser.setLastName(map.get("last_name").toString());
                     newUser.setEmail(map.get("email").toString());
+                    newUser.setType(1);
                     if (path.contains("facebook")) {
                         newUser.setFacebookId(networkId);
                     } else if (path.contains("github")) {
