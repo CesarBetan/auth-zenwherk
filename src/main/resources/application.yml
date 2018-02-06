@@ -50,12 +50,12 @@ server:
 aws:
   credentials:
     access:
-      key:AKIAI473JJCY5K4CLWWA
+      key: AKIAI473JJCY5K4CLWWA
   secret:
-      key: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
+      key: O98aQ0m+nNDb5/kIEBL9FcBaM97YqQlJ/4bFx26m
 cloud:
   aws:
     credentials:
-      accessKey:AKIAI473JJCY5K4CLWWA
-      secretKey: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
+      accessKey: AKIAI473JJCY5K4CLWWA
+      secretKey: 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
 
