@@ -58,4 +58,6 @@ cloud:
     credentials:
       accessKey: AKIAI473JJCY5K4CLWWA
       secretKey: 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
+    stack:
+      auto: false
 
