@@ -21,7 +21,6 @@
         }
         #loginPanel {
             display: inline-block;
-            width:480px;
             padding:50px;
             box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.6);
             border-radius:unset;
@@ -57,11 +56,11 @@
                 <form id="login" action="/login" method="post" class="form form-login">
                     <input type="hidden" id="csrf_token" name="_csrf" value=""/>
                     <input type="hidden" id="client" name="client_id" value="zenwherk"/>
-                    <div id="form-top">
-                        <div class="form-group">
+                    <div id="form-top" class="row">
+                        <div class="form-group col-sm-12">
                             <input required id="login-username" type="email" name="username" class="form-control" placeholder="Username" >
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-sm-12">
                             <input required id="login-password" type="password" name="password" class="form-control" placeholder="Password">
                         </div>
                     </div>

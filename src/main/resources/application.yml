@@ -2,17 +2,17 @@ spring:
   datasource:
     auth:
       initialize: false
-      url: jdbc:mysql://localhost/zenwherk_auth?useSSL=false
-      username: root
-      password:
+      url: jdbc:mysql://zenwherk-auth.cbt3wxqgkpus.us-east-1.rds.amazonaws.com/zenwherk_auth?useSSL=false
+      username: zenwherk
+      password: zenwherk-password
       driverClassName: com.mysql.jdbc.Driver
       connectionTestQuery: SELECT 1
       maximumPoolSize: 5
     provisioning:
       initialize: false
-      url: jdbc:mysql://localhost/zenwherk_api?useSSL=false
-      username: root
-      password:
+      url: jdbc:mysql://zenwherk.cbt3wxqgkpus.us-east-1.rds.amazonaws.com/zenwherk_api?useSSL=false
+      username: zenwherk
+      password: zenwherk-password
       driverClassName: com.mysql.jdbc.Driver
       connectionTestQuery: SELECT 1
       maximumPoolSize: 5
