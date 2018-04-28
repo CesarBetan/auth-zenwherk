@@ -1,4 +1,4 @@
-package com.nuzur.auth.config;
+package com.itesm.auth.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

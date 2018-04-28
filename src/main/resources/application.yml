@@ -1,32 +1,8 @@
-facebook:
-  client:
-    clientId: 529573730738984
-    clientSecret: 3b9c119ef9e4dffee304c6f046b79345
-    accessTokenUri: https://graph.facebook.com/oauth/access_token
-    userAuthorizationUri: https://www.facebook.com/dialog/oauth
-    tokenName: oauth_token
-    authenticationScheme: query
-    clientAuthenticationScheme: form
-    scope: email
-  resource:
-    userInfoUri: https://graph.facebook.com/me?fields=id,name,email,first_name,last_name
-
-github:
-  client:
-    clientId: dac5db50331a7520bf4d
-    clientSecret: 90c1c69d3991e1fc085467c5919ab7200473e291
-    accessTokenUri: https://github.com/login/oauth/access_token
-    userAuthorizationUri: https://github.com/login/oauth/authorize
-    clientAuthenticationScheme: form
-    scope: user
-  resource:
-    userInfoUri: https://api.github.com/user
-
 spring:
   datasource:
     auth:
       initialize: false
-      url: jdbc:mysql://localhost/nuzur-auth
+      url: jdbc:mysql://localhost/zenwherk_auth?useSSL=false
       username: root
       password:
       driverClassName: com.mysql.jdbc.Driver
@@ -34,7 +10,7 @@ spring:
       maximumPoolSize: 5
     provisioning:
       initialize: false
-      url: jdbc:mysql://localhost/nuzur
+      url: jdbc:mysql://localhost/zenwherk_api?useSSL=false
       username: root
       password:
       driverClassName: com.mysql.jdbc.Driver
@@ -46,18 +22,4 @@ logging:
     org.springframework.jdbc.core.JdbcTemplate: debug
 server:
   port: 9999
-
-aws:
-  credentials:
-    access:
-      key: AKIAI473JJCY5K4CLWWA
-  secret:
-      key: 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
-cloud:
-  aws:
-    credentials:
-      accessKey: AKIAI473JJCY5K4CLWWA
-      secretKey: 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
-    stack:
-      auto: false
 

@@ -1,6 +1,6 @@
-package com.nuzur.auth.config;
+package com.itesm.auth.config;
 
-import com.nuzur.auth.service.AuthProvider;
+import com.itesm.auth.service.AuthProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

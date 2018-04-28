@@ -1,9 +1,9 @@
-package com.nuzur.auth.service;
+package com.itesm.auth.service;
 
 
-import com.nuzur.auth.dao.UserDao;
-import com.nuzur.common.domain.User;
-import com.nuzur.common.util.PasswordHandler;
+import com.itesm.auth.dao.UserDao;
+import com.itesm.auth.domain.User;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +51,7 @@ public class AuthProvider implements AuthenticationProvider {
         if (user.getPassword() == null) {
             throw new BadCredentialsException("No password set for user");
         }
-        if (!user.getPassword().equals(PasswordHandler.encrypt(password))) {
+        if (!user.getPassword().equals(DigestUtils.sha512Hex(password))){
             throw new BadCredentialsException("Bad Credentials");
         }
         user.setPassword(null);

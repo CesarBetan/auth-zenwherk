@@ -3,43 +3,21 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>Nuzur Auth</title>
+    <title>Demo Auth</title>
     
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
     <base href="/"/>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/lux/bootstrap.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
-
-    <link rel="apple-touch-icon" sizes="57x57" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://s3.amazonaws.com/nuzur/icon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="https://s3.amazonaws.com/nuzur/icon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://s3.amazonaws.com/nuzur/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://s3.amazonaws.com/nuzur/icon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://s3.amazonaws.com/nuzur/icon/favicon-16x16.png">
-    <link rel="manifest" href="https://s3.amazonaws.com/nuzur/icon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="https://s3.amazonaws.com/nuzur/icon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    
     <style>
         html{
             font-size:16px;
         }
         body{
-            background-color:#EEE;
-            background-image: url("https://s3.amazonaws.com/nuzur/nuzur_back3.png");
-            background-size: 100%;
+            background-color:#FFF;
         }
         #loginPanel {
             display: inline-block;
@@ -68,62 +46,17 @@
         #form-bottom{
             height:45px;
         }
-
-        h1{
-            font-size: 45px;
-            padding-bottom: 15px;
-            font-weight:900;
-        }
-
-        h1 img{
-            display: inline-block;
-            width: 75%;
-        }
-        .ssologin{
-            display: inline-block;
-            width:189px;
-            text-align: center;
-            float: left;
-            opacity:0.6;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        .ssologin:hover {
-            opacity:1.0;
-        }
-        .ssologin img{
-            width:150px;
-            display: inline-block;
-        }
-
-        .form-control{
-            font-size: 18px;
-            height: 50px;
-        }
-        #ssocontainer{
-            padding-top:10px;
-        }
-
-        #userinfo{
-            padding:20px;
-            font-size:18px;
-        }
-
-        #userinfo #user{
-            color:#000;
-        }
     </style>
 </head>
 <body>
 
 <div id="main" class="container">
     <div id="loginPanel" class="panel">
-        <h1><img src="https://s3.amazonaws.com/nuzur/logo.png" /></h1>
         <div class="unauthenticated">
             <div>
                 <form id="login" action="/login" method="post" class="form form-login">
                     <input type="hidden" id="csrf_token" name="_csrf" value=""/>
-                    <input type="hidden" id="client" name="client_id" value="nuzur"/>
+                    <input type="hidden" id="client" name="client_id" value="zenwherk"/>
                     <div id="form-top">
                         <div class="form-group">
                             <input required id="login-username" type="email" name="username" class="form-control" placeholder="Username" >
@@ -136,11 +69,6 @@
                         <button type="submit" class="btn btn-primary" id="loginbtn" >Login</button>
                     </div>
                 </form>
-            </div>
-            <hr />
-            <div id="ssocontainer">
-                <a class="ssologin" href="/login/facebook"><img src="https://s3.amazonaws.com/nuzur/fb_btn.png" /></a>
-                <a class="ssologin" href="/login/github"><img src="https://s3.amazonaws.com/nuzur/gh_btn.png" /></a>
             </div>
 
         </div>
@@ -162,7 +90,7 @@
             $("#user").html(data.principal.name);
             $(".unauthenticated").hide();
             $(".authenticated").show();
-            window.location.href = "https://nuzur.com";
+            window.location.href = "http://localhost:8080";
         }
     });
 
