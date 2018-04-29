@@ -16,5 +16,10 @@ spring:
       driverClassName: com.mysql.jdbc.Driver
       connectionTestQuery: SELECT 1
       maximumPoolSize: 1
-
+logging:
+  level:
+    com.nuzur: debug
+    org.springframework.jdbc.core.JdbcTemplate: debug
+server:
+  port: 9999
 

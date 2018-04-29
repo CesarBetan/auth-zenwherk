@@ -77,7 +77,7 @@ public class DatabaseConfig {
         configProps.setProperty("connectionTestQuery", connectionTestQueryAuth);
         configProps.setProperty("driverClassName", driverClassNameAuth);
         configProps.setProperty("jdbcUrl", dataSourceUrlAuth);
-        //configProps.setProperty("maximumPoolSize", maximumPoolSizeAuth);
+        configProps.setProperty("maximumPoolSize", maximumPoolSizeAuth);
 
         HikariConfig hc = new HikariConfig(configProps);
         hc.setDataSourceProperties(dsProps);
@@ -102,7 +102,7 @@ public class DatabaseConfig {
         configProps.setProperty("connectionTestQuery", connectionTestQueryProv);
         configProps.setProperty("driverClassName", driverClassNameProv);
         configProps.setProperty("jdbcUrl", dataSourceUrlProv);
-        //configProps.setProperty("maximumPoolSize", maximumPoolSizeProv);
+        configProps.setProperty("maximumPoolSize", maximumPoolSizeProv);
 
         HikariConfig hc = new HikariConfig(configProps);
         hc.setDataSourceProperties(dsProps);
