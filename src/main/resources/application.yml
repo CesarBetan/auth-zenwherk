@@ -7,7 +7,7 @@ spring:
       password: zenwherk-password
       driverClassName: com.mysql.jdbc.Driver
       connectionTestQuery: SELECT 1
-      maximumPoolSize: 5
+      maximumPoolSize: 1
     provisioning:
       initialize: false
       url: jdbc:mysql://zenwherk.cbt3wxqgkpus.us-east-1.rds.amazonaws.com/zenwherk_api?useSSL=false
@@ -15,7 +15,11 @@ spring:
       password: zenwherk-password
       driverClassName: com.mysql.jdbc.Driver
       connectionTestQuery: SELECT 1
-      maximumPoolSize: 5
-
-
+      maximumPoolSize: 1
+logging:
+  level:
+    com.nuzur: debug
+    org.springframework.jdbc.core.JdbcTemplate: debug
+server:
+  port: 9999
 
