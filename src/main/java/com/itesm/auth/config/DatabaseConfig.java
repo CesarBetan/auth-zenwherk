@@ -23,44 +23,32 @@ import java.util.Properties;
 public class DatabaseConfig {
 
     //prov
-    @Value("${spring.datasource.provisioning.username}")
-    private String userProv;
+    private String userProv = "zenwherk";
 
-    @Value("${spring.datasource.provisioning.password}")
-    private String passwordProv;
+    private String passwordProv = "zenwherk-password";
 
-    @Value("${spring.datasource.provisioning.url}")
-    private String dataSourceUrlProv;
+    private String dataSourceUrlProv = "jdbc:mysql://zenwherk.cbt3wxqgkpus.us-east-1.rds.amazonaws.com/zenwherk_api?useSSL=false";
 
-    @Value("${spring.datasource.provisioning.driverClassName}")
-    private String driverClassNameProv;
+    private String driverClassNameProv = "com.mysql.jdbc.Driver";
 
-    @Value("${spring.datasource.provisioning.connectionTestQuery}")
-    private String connectionTestQueryProv;
+    private String connectionTestQueryProv = "SELECT 1";
 
-    @Value("${spring.datasource.provisioning.maximumPoolSize}")
-    private String maximumPoolSizeProv;
+    private String maximumPoolSizeProv = "5";
 
 
 
     //auth
-    @Value("${spring.datasource.auth.username}")
-    private String userAuth;
+    private String userAuth = "zenwherk";
 
-    @Value("${spring.datasource.auth.password}")
-    private String passwordAuth;
+    private String passwordAuth = "zenwherk-password";
 
-    @Value("${spring.datasource.auth.url}")
-    private String dataSourceUrlAuth;
+    private String dataSourceUrlAuth = "jdbc:mysql://zenwherk-auth.cbt3wxqgkpus.us-east-1.rds.amazonaws.com/zenwherk_auth?useSSL=false";
 
-    @Value("${spring.datasource.auth.driverClassName}")
-    private String driverClassNameAuth;
+    private String driverClassNameAuth = "com.mysql.jdbc.Driver";
 
-    @Value("${spring.datasource.auth.connectionTestQuery}")
-    private String connectionTestQueryAuth;
+    private String connectionTestQueryAuth = "SELECT 1";
 
-    @Value("${spring.datasource.auth.maximumPoolSize}")
-    private String maximumPoolSizeAuth;
+    private String maximumPoolSizeAuth = "5";
 
 
 
