@@ -33,7 +33,7 @@ public class DatabaseConfig {
 
     private String passwordProv = "zenwherk-password";
 
-    private String dataSourceUrlProv = "jdbc:mysql://zenwherk.cbt3wxqgkpus.us-east-1.rds.amazonaws.com:3306/zenwherk_api?useSSL=false";
+    private String dataSourceUrlProv = "jdbc:mysql://zenwherk.cbt3wxqgkpus.us-east-1.rds.amazonaws.com:3306/zenwherk_api";
 
     private String driverClassNameProv = "com.mysql.jdbc.Driver";
 
@@ -48,7 +48,7 @@ public class DatabaseConfig {
 
     private String passwordAuth = "zenwherk-password";
 
-    private String dataSourceUrlAuth = "jdbc:mysql://zenwherk-auth.cbt3wxqgkpus.us-east-1.rds.amazonaws.com:3306/zenwherk_auth?useSSL=false";
+    private String dataSourceUrlAuth = "jdbc:mysql://zenwherk-auth.cbt3wxqgkpus.us-east-1.rds.amazonaws.com:3306/zenwherk_auth";
 
     private String driverClassNameAuth = "com.mysql.jdbc.Driver";
 
