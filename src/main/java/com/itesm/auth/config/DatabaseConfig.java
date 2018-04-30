@@ -5,13 +5,19 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -56,7 +62,7 @@ public class DatabaseConfig {
     @Bean(name = "dsAuth")
     @Primary
     public DataSource authDataSource() {
-        Properties dsProps = new Properties();
+        /*Properties dsProps = new Properties();
         dsProps.setProperty("url", dataSourceUrlAuth);
         dsProps.setProperty("user", userAuth);
         dsProps.setProperty("password", passwordAuth);
@@ -69,7 +75,13 @@ public class DatabaseConfig {
 
         HikariConfig hc = new HikariConfig(configProps);
         hc.setDataSourceProperties(dsProps);
-        return new HikariDataSource(hc);
+        return new HikariDataSource(hc);*/
+        return DataSourceBuilder.create()
+                .username(userAuth)
+                .password(passwordAuth)
+                .url(dataSourceUrlAuth)
+                .driverClassName(driverClassNameAuth)
+                .build();
     }
 
     @Bean(name = "jdbcAuth")
@@ -81,7 +93,7 @@ public class DatabaseConfig {
 
     @Bean(name = "dsProvisioning")
     public DataSource primaryDataSource() {
-        Properties dsProps = new Properties();
+        /*Properties dsProps = new Properties();
         dsProps.setProperty("url", dataSourceUrlProv);
         dsProps.setProperty("user", userProv);
         dsProps.setProperty("password", passwordProv);
@@ -94,7 +106,13 @@ public class DatabaseConfig {
 
         HikariConfig hc = new HikariConfig(configProps);
         hc.setDataSourceProperties(dsProps);
-        return new HikariDataSource(hc);
+        return new HikariDataSource(hc);*/
+        return DataSourceBuilder.create()
+                .username(userProv)
+                .password(passwordProv)
+                .url(dataSourceUrlProv)
+                .driverClassName(driverClassNameProv)
+                .build();
     }
 
     @Bean(name = "jdbcProvisioning")
