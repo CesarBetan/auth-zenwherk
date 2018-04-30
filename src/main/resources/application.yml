@@ -17,4 +17,3 @@ spring:
       connectionTestQuery: SELECT 1
       maximumPoolSize: 1
 
-
